@@ -1,0 +1,1 @@
+ C:\\Users\\yanyg\\OneDrive\ -\ Ucompensar\\projects\\naya_sport_flutter\\naya_sport_flutter\\.dart_tool\\flutter_build\\2a649bcae1aaee2ff894b9866d18e536\\native_assets.yaml: 
