@@ -8,12 +8,14 @@ import 'package:naya_sport_flutter/ui/pages/screens/uniforms_page.dart';
 import 'package:naya_sport_flutter/ui/providers/selected_screen_provider.dart';
 import 'package:naya_sport_flutter/ui/widgets/naya_navigation_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NayaSportStore extends StatelessWidget {
   const NayaSportStore({super.key});
 
   @override
   Widget build(BuildContext context) {
+    late String? rol;
     final selectedScreenProvider = Provider.of<SelectedScreenProvider>(context);
     const String title = 'Naya Sport Store';
     final List<Widget> screens = [
@@ -54,6 +56,21 @@ class NayaSportStore extends StatelessWidget {
         label: 'Contacto',
       ),
     ];
+    _getRol() async {
+      final prefs = await SharedPreferences.getInstance();
+      rol = prefs.getString('rol');
+    }
+
+    _getRol();
+
+    if (rol == 'admin') {
+      itemsNayaNavBar.add(
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.admin_panel_settings),
+          label: 'Dashboard',
+        ),
+      );
+    }
 
     return MaterialApp(
       title: 'Naya Sport Store',
@@ -64,7 +81,10 @@ class NayaSportStore extends StatelessWidget {
         appBar: AppBar(
           title: Row(
             children: [
-              SvgPicture.asset('assets/logo.svg', width: 50,),
+              SvgPicture.asset(
+                'assets/logo.svg',
+                width: 50,
+              ),
               const SizedBox(width: 10.0),
               const Text(
                 title,

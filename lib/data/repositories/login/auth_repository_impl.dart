@@ -15,4 +15,12 @@ class AuthRepositoryImpl implements AuthRepository {
     final responseCode = await authService.login(email, password);
     return responseCode;
   }
+  @override
+  Future<int?> register(String email, String password) async {
+    // Aquí puedes implementar la lógica para llamar al servicio de autenticación
+    // y obtener los datos del usuario.
+    //201
+    final responseCode = await authService.register(email, password);
+    return responseCode;
+  }
 }

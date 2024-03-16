@@ -21,7 +21,7 @@ class AuthenticationWrapper extends StatelessWidget {
     );
   }
 
-  Future<bool> isAuthenticated() async {
+  Future <bool> isAuthenticated() async {
     // Obtén una instancia de SharedPreferences
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey('accessToken')) {

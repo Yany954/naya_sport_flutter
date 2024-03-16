@@ -10,4 +10,7 @@ class LoginUseCase {
   Future<int?> login(String email, String password) async {
     return _authRepository.login(email, password);
   }
+  Future<int?> register(String email, String password) async {
+    return _authRepository.register(email, password);
+  }
 }

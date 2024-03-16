@@ -9,16 +9,15 @@ import '../screens/naya_sport_screen.dart';
 import './text_field_container.dart'; // Importa el widget TextFieldContainer
 import './rounded_button.dart'; // Importa el widget RoundedButton
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   late TextEditingController _usernameController;
   late TextEditingController _passwordController;
   late LoginUseCase loginUseCase;
-  bool _isPasswordVisible = false;
 
   @override
   void initState() {
@@ -78,16 +77,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         suffixIcon: IconButton(
                           onPressed: () {
-                            setState(() {
-                              _isPasswordVisible = !_isPasswordVisible;
-                            });
                           }, // Función para alternar visibilidad de la contraseña
-                          icon: Icon(_isPasswordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off),
+                          icon: Icon(Icons.password),
                         ),
                       ),
-                      obscureText: !_isPasswordVisible,
                     ),
                   ],
                 ),
@@ -108,15 +101,15 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () async {
                   final username = _usernameController.text;
                   final password = _passwordController.text;
-                  final result = await loginUseCase.login(username, password);
-                  if (result == 200) {
+                  final result = await loginUseCase.register(username, password);
+                  if (result == 201) {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const NayaSportStore()),
                     );
                   } else {
-                    _showLoginFailedAlert(context);
+                    _showRegisterFailedAlert(context);
                   }
                 },
               ),
@@ -127,13 +120,13 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _showLoginFailedAlert(BuildContext context) {
+  void _showRegisterFailedAlert(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Login Failed'),
-          content: Text('Incorrect username or password. Please try again.'),
+          title: Text('Register Failed'),
+          content: Text('Please try again.'),
           actions: [
             TextButton(
               onPressed: () {
